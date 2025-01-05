@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Walmart Order Splitter",
+  "version": "1.0",
+  "description": "Split Walmart order costs among friends.",
+  "permissions": ["scripting", "activeTab", "storage"],
+  "host_permissions": ["https://www.walmart.ca/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.walmart.ca/*"],
+      "js": ["content.js"]
+    }
+  ]
+}

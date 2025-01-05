@@ -1,0 +1,38 @@
+<div class="flex flex-row">
+  <div class="flex flex-column pl3 pr3 pr4-m">
+    <div class="flex justify-between">
+      <div class="f7 f5-m gray print-item-title">
+        <a
+          link-identifier="itemClick"
+          class="no-underline"
+          aria-label="Heinz Original Beans in Tomato Sauce"
+          href="/en/ip/heinz-original-beans-in-tomato-sauce/10297184"
+          ><div
+            data-testid="productName"
+            class="sans-serif f5-l lh-copy-l lh-title overflow-hidden mid-gray"
+          >
+            <span
+              class="w_vi_D"
+              style="
+                -webkit-line-clamp: 2;
+                padding-bottom: 0em;
+                margin-bottom: 0em;
+              "
+              >Heinz Original Beans in Tomato Sauce</span
+            >
+          </div></a
+        >
+        <div class="mt1 mt1" data-testid="productDescription"></div>
+      </div>
+    </div>
+    <div class="bill-order-weight-adjust"><div class="dn">Regular</div></div>
+    <div class="pt1 f7 f6-m bill-item-quantity gray" data-sensitivity="">
+      3 ea
+    </div>
+  </div>
+  <div class="ml-auto nowrap" data-sensitivity="">
+    <div class="column3">
+      <div class="f5 b black tr"><span aria-hidden="false">$4.98</span></div>
+    </div>
+  </div>
+</div>
