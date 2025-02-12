@@ -45,9 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsList = document.getElementById('items-list');
     console.log("Executing popup.js");
 
+
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript(
             {
+                
                 target: { tabId: tabs[0].id },
                 func: () => {
                     const extractItemsWithPricesAndTotals = () => {
@@ -74,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             },
             (results) => {
+
+
+
                 if (chrome.runtime.lastError) {
                     console.error(chrome.runtime.lastError.message);
                     itemsList.innerHTML = '<li>Error extracting items.</li>';
@@ -92,6 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 friends.forEach((friend) => {
                     if (!friendsData[friend]) friendsData[friend] = [];
                 });
+                
+                
+                
 
                 const updateTotals = () => {
                     friends.forEach((friend) => {
@@ -324,6 +332,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 itemsList.appendChild(copyButton);
+
+
+                const clearButton = document.createElement('button');
+                clearButton.textContent = 'Clear Storage';
+                clearButton.style.marginLeft = '30px';
+                
+
+                clearButton.addEventListener('click', () => {
+                    localStorage.clear();
+                    alert('Local storage cleared!');
+                    //location.reload();
+                });
+                
+                itemsList.appendChild(clearButton);
+
             }
         );
     });
