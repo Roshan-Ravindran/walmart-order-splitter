@@ -64,13 +64,3 @@ Extracts the order ID from the URL using regex.
 
 - Chrome Extensions API
 - JavaScript (Vanilla JS, DOM Manipulation, LocalStorage API)
-
-## Future Improvements
-
-- Support for additional order platforms.
-- Improved UI/UX.
-- Ability to export/share splits.
-
-## License
-
-MIT License
