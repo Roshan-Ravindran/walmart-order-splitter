@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         const itemElements = document.querySelectorAll('.flex.flex-row');
                         itemElements.forEach((itemElement) => {
                             const nameElement = itemElement.querySelector('.w_vi_D');
-                            const priceElement = itemElement.querySelector('.ml-auto .f5.b.black.tr span');
+                            const priceElements = itemElement.querySelectorAll('.ml-auto .f5.b.black.tr span');
+                            const priceElement = priceElements.length > 1 ? priceElements[1] : priceElements[0]; 
                             const name = nameElement ? nameElement.textContent.trim() : null;
                             const price = priceElement ? parseFloat(priceElement.textContent.replace('$', '').trim()) : null;
                             if (name) {
@@ -65,9 +66,33 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         });
 
-                        const subtotalElement = document.querySelector('.bill-order-payment-subtotal span');
+                        // Select the "Subtotal after savings" element
+                        const subtotalElement = document.querySelector('.db.tr.b.f5.pb3');
+                        const multiSaveDiscountElement = document.querySelector('.w_lvOM.green.w_qc1P.w_wTRX'); // Multisave Discount
+
+                        let subtotal = null;
+                        let multiSaveDiscount = 0;
+
+                        // Extract subtotal after savings
+                        if (subtotalElement) {
+                            const match = subtotalElement.textContent.match(/\d+(\.\d{1,2})?/);
+                            subtotal = match ? parseFloat(match[0]) : null;
+                        }
+
+                        // Extract multisave discount (negative value)
+                        if (multiSaveDiscountElement) {
+                            const match = multiSaveDiscountElement.textContent.match(/-?\d+(\.\d{1,2})?/);
+                            multiSaveDiscount = match ? parseFloat(match[0]) : 0;
+                        }
+
+                        // Calculate final subtotal after discount
+                        subtotal = subtotal !== null ? subtotal - multiSaveDiscount : null;
+
+                        // Log the updated subtotal
+                        console.log("Updated Subtotal After MultiSave Discount:", subtotal);
+
+
                         const totalElement = document.querySelector('.bill-order-total-payment h2:last-of-type');
-                        const subtotal = subtotalElement ? parseFloat(subtotalElement.textContent.replace('$', '').trim()) : null;
                         const total = totalElement ? parseFloat(totalElement.textContent.replace('$', '').trim()) : null;
 
                         return { items, subtotal, total };
