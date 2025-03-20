@@ -65,24 +65,58 @@ document.addEventListener('DOMContentLoaded', () => {
                                 items.push({ name, price });
                             }
                         });
+                        
 
-                        // Select the "Subtotal after savings" element
-                        const subtotalElement = document.querySelector('.db.tr.b.f5.pb3');
+                        // Check if the original subtotal is struck through
+                        const originalSubtotal = document.querySelector('.w_jaCq.w_Kvb_.w_7C7W.strike');
+                        let newSubtotal = null;
+                        if (originalSubtotal) {
+                            // If there is a strikethrough, get the new subtotal
+                            newSubtotal = document.querySelector('span[aria-label^="Subtotal after savings"]').textContent;
+                            console.log("New Subtotal:", newSubtotal);
+                        } else {
+                            // If no strikethrough, use the original subtotal
+                            newSubtotal = originalSubtotal.textContent;
+                            console.log("Original Subtotal:", originalSubtotal.textContent);
+                        }
+
                         const multiSaveDiscountElement = document.querySelector('.w_lvOM.green.w_qc1P.w_wTRX'); // Multisave Discount
+                        console.log("multisave discount element:", multiSaveDiscountElement);
 
                         let subtotal = null;
                         let multiSaveDiscount = 0;
 
+                        // const taxElements = document.querySelectorAll('.w_jaCq.w_84VE.w_7C7W');
+
+                        // // Initialize total sum
+                        // let taxtotal = 0;
+
+                        // // Loop through each element and extract numbers
+                        // taxElements.forEach(element => {
+                        //     const match = element.textContent.match(/-?\d+(\.\d{1,2})?/); // Extract numbers including negative values
+                        //     if (match) {
+                        //         taxtotal += parseFloat(match[0]); // Convert to float and add to total
+                        //     }
+                        // });
+
+                        // // Log the total sum
+                        // console.log("tax Total Sum:", taxtotal.toFixed(2));
+
+                        console.log("bla vbla", newSubtotal);
+                        
                         // Extract subtotal after savings
-                        if (subtotalElement) {
-                            const match = subtotalElement.textContent.match(/\d+(\.\d{1,2})?/);
+                        if (newSubtotal) {
+                            const match = newSubtotal.match(/\d+(\.\d{1,2})?/);
                             subtotal = match ? parseFloat(match[0]) : null;
+                            console.log("match", match);
+                            console.log("Subtotal After Savings:", subtotal);
                         }
 
                         // Extract multisave discount (negative value)
                         if (multiSaveDiscountElement) {
                             const match = multiSaveDiscountElement.textContent.match(/-?\d+(\.\d{1,2})?/);
                             multiSaveDiscount = match ? parseFloat(match[0]) : 0;
+                            console.log("MultiSave Discount:", multiSaveDiscount);
                         }
 
                         // Calculate final subtotal after discount
